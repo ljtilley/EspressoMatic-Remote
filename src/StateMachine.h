@@ -17,17 +17,13 @@
 #define STATEMACHINE_H_
 
 /* MENU SYSTEM VARIABLES SETUP */
-int menu_timeout = 2000;
-unsigned long last_action_time = 0;
-int timeOld = 0;
-int timeNew = 0;
-int timer = 0;
+
 
 // Set up state machines prototypes
 State DisplayStatus();
 State DisplayMenu();
 State EditMenu();
 
-SM UserInterface(DisplayStatus);
+extern SM UserInterface;
 
 #endif /* STATEMACHINE_H_ */
