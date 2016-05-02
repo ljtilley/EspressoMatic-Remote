@@ -55,7 +55,7 @@ public:
     bool sel_btn_isPressed();
 
     //output functions
-    void displayStatus(bool connected, StatusPacket state);
+    void displayStatus();
     void clearDisplay();
     void displayMenuItem();
     void refreshMenuItem();

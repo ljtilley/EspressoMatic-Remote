@@ -113,19 +113,19 @@ void HardwareUIClass::displayOn() {
     backlightON();
 }
 
-void HardwareUIClass::displayStatus(bool connected, StatusPacket state) {
+void HardwareUIClass::displayStatus() {
     _lcd.setCursor(0,0);
-    if(connected == false) {
-        _lcd.print("Waiting for Connection...");
-    }
-    else {
+    // if(connected == false) {
+    //     _lcd.print("Waiting for Connection...");
+    // }
+    // else {
         _lcd.print("Boiler temp: ");
-        _lcd.print(state.temp);
+        _lcd.print(Status.getTemp());
         //Serial.println(temp);
         _lcd.setCursor(0,1);
         String displaytemp = "Set temp: " + (String) 99 + "F"; // (String) 99 should be changed to something that actually comes from the settings once the getters/setters are implemented
         _lcd.print(displaytemp);
-    }
+    // }
 }
 
 void HardwareUIClass::displayMenuItem() {

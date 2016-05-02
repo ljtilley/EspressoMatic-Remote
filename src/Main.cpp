@@ -79,7 +79,7 @@ State DisplayStatus() {
     timer += abs(timeOld - timeNew);
 
     if(timer > 2000) {
-       HardwareUI.displayStatus(true, status); // this fakes having a radio connection
+       HardwareUI.displayStatus(); // this fakes having a radio connection
        timer=0;
     }
     /* end test section */
@@ -95,8 +95,8 @@ State DisplayStatus() {
     // move to DisplayMenu State if any button is pressed
     if(HardwareUI.nxt_btn_isPressed() || HardwareUI.prev_btn_isPressed() || HardwareUI.sel_btn_isPressed()) {
         last_action_time = millis();
-        menu.select(brewtemp);
-        updateMenuDisplay(menu.getCurrent());
+        Menu.select(brewtemp);
+        updateMenuDisplay(Menu.getCurrent());
         Serial.println("Moving to DisplayMenu State");
         UserInterface.Set(DisplayMenu);
     }
@@ -110,12 +110,12 @@ State DisplayMenu() {
     if(HardwareUI.nxt_btn_isPressed()) {
         last_action_time = millis();
         Serial.println("Moving menu up");
-        menu.moveDown();
+        Menu.moveDown();
     }
     else if (HardwareUI.prev_btn_isPressed()) {
         last_action_time = millis();
         Serial.println("Moving menu down");
-        menu.moveUp();
+        Menu.moveUp();
     }
 
     // Check for transition cases. Either a timeout of 3 seconds of no activity (back to displaystatus) or click on the encoder to transition to edit state.
@@ -126,32 +126,32 @@ State DisplayMenu() {
 }
 
 State EditMenu() {
-    if(menu.getCurrent().getShortkey() == 'R') {
+    if(Menu.getCurrent().getShortkey() == 'R') {
     	settings.reset_default();
     	loadMenuValues();
     	UserInterface.Set(DisplayMenu);
     }
     else {
 		if (HardwareUI.nxt_btn_isPressed()) {
-			menu.getCurrent().increment(1);
+			Menu.getCurrent().increment(1);
 
 		}
 		else if (HardwareUI.prev_btn_isPressed()) {
-			menu.getCurrent().decrement(1);
+			Menu.getCurrent().decrement(1);
 		}
 		// Check for transition to next state (encoder clicked)
 		if (HardwareUI.sel_btn_isPressed()) {
-			if(strcmp(menu.getCurrent().getName(), "Brew Set Point") == 0) {
+			if(strcmp(Menu.getCurrent().getName(), "Brew Set Point") == 0) {
 				Serial.println("updating Brew Set Point");
-				settings_struct.brew_temp = (short) menu.getCurrent().getValue();
+				settings_struct.brew_temp = (short) Menu.getCurrent().getValue();
 				Serial.println(settings_struct.brew_temp);
-			} else if(strcmp(menu.getCurrent().getName(), "Steam Set Point") == 0) {
-				settings_struct.steam_temp = (short) menu.getCurrent().getValue();
-			} else if(strcmp(menu.getCurrent().getName(), "Temp Offset") == 0) {
-				settings_struct.temp_offset = (short) menu.getCurrent().getValue();
+			} else if(strcmp(Menu.getCurrent().getName(), "Steam Set Point") == 0) {
+				settings_struct.steam_temp = (short) Menu.getCurrent().getValue();
+			} else if(strcmp(Menu.getCurrent().getName(), "Temp Offset") == 0) {
+				settings_struct.temp_offset = (short) Menu.getCurrent().getValue();
 			}
 			settings.update(settings_struct.brew_temp, settings_struct.steam_temp, settings_struct.temp_offset);
-			updateMenuDisplay(menu.getCurrent());
+			updateMenuDisplay(Menu.getCurrent());
 			UserInterface.Set(DisplayMenu);
 		}
     }
@@ -160,9 +160,9 @@ State EditMenu() {
 void itemChangeEvent(MenuItemChangeEvent changed) {
     Serial.print("MenuItemChangeEven Fired\n");
     lcd.clear();
-    lcd.print(menu.getCurrent().getName());
+    lcd.print(Menu.getCurrent().getName());
     lcd.setCursor(0, 1);
-    lcd.print(String(menu.getCurrent().getValue())+(char)223+"F");
+    lcd.print(String(Menu.getCurrent().getValue())+(char)223+"F");
 }
 
 void menuChangeEvent(MenuChangeEvent changed) {
@@ -175,7 +175,7 @@ void menuChangeEvent(MenuChangeEvent changed) {
 void menuSetup()
 {
     // set up menu structure
-    MenuItem root = menu.getRoot();
+    MenuItem root = Menu.getRoot();
     root.addAfter(brewtemp);
     brewtemp.add(steamtemp);
     // TODO: features to be added later with a second SSR

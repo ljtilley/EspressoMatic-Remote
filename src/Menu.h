@@ -18,9 +18,8 @@ void menuChangeEvent(MenuChangeEvent);
 void itemChangeEvent(MenuItemChangeEvent);
 
 /* MENU ITEM STRUCTURE SETUP */
-extern MenuBackend menu;
-//beneath is list of menu items needed to build the menu
-//beneath is list of menu items needed to build the menu
+extern MenuBackend Menu;
+
 extern MenuItem brewtemp;
 extern MenuItem steamtemp;
 extern MenuItem brewtime;

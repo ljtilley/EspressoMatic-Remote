@@ -12,6 +12,18 @@ struct StatusPacket {
 	short temp, state;
 };
 
+class StatusClass {
+public:
+	//public stuff
+	StatusClass();
+	bool isConnected();
+	int getTemp();
+	int getState();
+private:
+	StatusPacket _status;
+	//private stuff;
+};
 
+extern StatusClass Status;
 
 #endif /* STATUS_H_ */
