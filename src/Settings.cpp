@@ -82,3 +82,5 @@ void MachineSettings::setTempOffset(short temp_offset){
 	settings_struct.temp_offset = temp_offset;
 	EEPROM.updateBlock(configAddress, settings_struct);
 }
+
+MachineSettings Settings;

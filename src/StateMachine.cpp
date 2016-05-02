@@ -1,4 +1,5 @@
 #include "StateMachine.h"
+#include "Settings.h"
 
 int menu_timeout = 2000;
 unsigned long last_action_time = 0;
@@ -63,7 +64,7 @@ State DisplayMenu() {
 
 State EditMenu() {
     if(Menu.getCurrent().getShortkey() == 'R') {
-    	//settings.reset_default();
+    	Settings.reset_default();
     	//loadMenuValues();
     	UserInterface.Set(DisplayMenu);
     }
@@ -79,14 +80,13 @@ State EditMenu() {
 		if (HardwareUI.sel_btn_isPressed()) {
 			if(strcmp(Menu.getCurrent().getName(), "Brew Set Point") == 0) {
 				Serial.println("updating Brew Set Point");
-				//settings_struct.brew_temp = (short) Menu.getCurrent().getValue();
-				//Serial.println(settings_struct.brew_temp);
+                Settings.setBrewTemp((short) Menu.getCurrent().getValue());
+				Serial.println(Settings.getBrewTemp());
 			} else if(strcmp(Menu.getCurrent().getName(), "Steam Set Point") == 0) {
-				//settings_struct.steam_temp = (short) Menu.getCurrent().getValue();
+                Settings.setSteamTemp((short) Menu.getCurrent().getValue());
 			} else if(strcmp(Menu.getCurrent().getName(), "Temp Offset") == 0) {
-				//settings_struct.temp_offset = (short) Menu.getCurrent().getValue();
+                Settings.setTempOffset((short) Menu.getCurrent().getValue());
 			}
-			//settings.update(settings_struct.brew_temp, settings_struct.steam_temp, settings_struct.temp_offset);
 			HardwareUI.displayMenuItem(Menu.getCurrent());
 			UserInterface.Set(DisplayMenu);
 		}

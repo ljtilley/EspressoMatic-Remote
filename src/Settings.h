@@ -42,7 +42,7 @@ public:
 	MachineSettings();
 	~MachineSettings();
 	void load();
-	
+
 	short getBrewTemp();
 	void setBrewTemp(short brew_temp);
 	short getSteamTemp();
@@ -59,6 +59,6 @@ private:
 	int configAddress;
 };
 
-
+extern MachineSettings Settings;
 
 #endif /* SETTINGS_H_ */
