@@ -1,9 +1,12 @@
 #include <Arduino.h>
 #include <Button.h>
 #include <LiquidCrystal.h>
-#include "HardwareUI.h"
+#include <MenuBackend.h>
+#include "Menu.h"
 #include "Status.h"
 #include "Settings.h"
+#include "HardwareUI.h"
+
 
 LiquidCrystal HardwareUIClass::_lcd(RSPIN, ENABLEPIN, D0, D1, D2, D3);
 Button HardwareUIClass::_up_btn = Button(UP_BUTTON, true, true, 25);
@@ -128,8 +131,14 @@ void HardwareUIClass::displayStatus() {
     // }
 }
 
-void HardwareUIClass::displayMenuItem() {
-    _lcd.print("Hello World!");
+void HardwareUIClass::displayMenuItem(MenuItem item) {
+    Serial.println("Trying to update lcd display with the proper menu");
+    _lcd.clear();
+    _lcd.print(item.getName());
+    _lcd.setCursor(0, 1);
+    if (item.isEqual(brewtemp) || item.isEqual(steamtemp) || item.isEqual(tempoffset)) {
+        _lcd.print(String(item.getValue())+(char)223+"F");
+    }
 }
 
 HardwareUIClass HardwareUI;

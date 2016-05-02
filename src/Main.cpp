@@ -66,7 +66,6 @@ void updateDisplay(bool connected, StatusPacket state);
 
 
 void displayMenuValue();
-void updateMenuDisplay(MenuItem item);
 void loadMenuValues();
 
 
@@ -96,7 +95,7 @@ State DisplayStatus() {
     if(HardwareUI.nxt_btn_isPressed() || HardwareUI.prev_btn_isPressed() || HardwareUI.sel_btn_isPressed()) {
         last_action_time = millis();
         Menu.select(brewtemp);
-        updateMenuDisplay(Menu.getCurrent());
+        HardwareUI.displayMenuItem(Menu.getCurrent());
         Serial.println("Moving to DisplayMenu State");
         UserInterface.Set(DisplayMenu);
     }
@@ -151,7 +150,7 @@ State EditMenu() {
 				settings_struct.temp_offset = (short) Menu.getCurrent().getValue();
 			}
 			settings.update(settings_struct.brew_temp, settings_struct.steam_temp, settings_struct.temp_offset);
-			updateMenuDisplay(Menu.getCurrent());
+			HardwareUI.displayMenuItem(Menu.getCurrent());
 			UserInterface.Set(DisplayMenu);
 		}
     }
@@ -167,7 +166,7 @@ void itemChangeEvent(MenuItemChangeEvent changed) {
 
 void menuChangeEvent(MenuChangeEvent changed) {
 
-    updateMenuDisplay(changed.to);
+    HardwareUI.displayMenuItem(changed.to);
 }
 
 
@@ -200,15 +199,6 @@ void loadMenuValues() {
 }
 
 // actual functions
-void updateMenuDisplay(MenuItem item) {
-    Serial.println("Trying to update lcd display with the proper menu");
-    lcd.clear();
-    lcd.print(item.getName());
-    lcd.setCursor(0, 1);
-    if (item.isEqual(brewtemp) || item.isEqual(steamtemp) || item.isEqual(tempoffset)) {
-        lcd.print(String(item.getValue())+(char)223+"F");
-    }
-}
 
 void updateDisplay(bool connected, StatusPacket state) {
 	lcd.setCursor(0,0);

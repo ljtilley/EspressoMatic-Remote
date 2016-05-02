@@ -16,6 +16,7 @@
 #include <Arduino.h>
 #include <Button.h>
 #include <LiquidCrystal.h>
+#include <MenuBackend.h>
 #include "Status.h"
 
 #ifndef HARDWAREUI_H_
@@ -57,7 +58,7 @@ public:
     //output functions
     void displayStatus();
     void clearDisplay();
-    void displayMenuItem();
+    void displayMenuItem(MenuItem item);
     void refreshMenuItem();
 
     void backlightON();
