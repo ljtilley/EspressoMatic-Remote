@@ -126,7 +126,7 @@ void HardwareUIClass::displayStatus() {
         _lcd.print(Status.getTemp());
         //Serial.println(temp);
         _lcd.setCursor(0,1);
-        String displaytemp = "Set temp: " + (String) 99 + "F"; // (String) 99 should be changed to something that actually comes from the settings once the getters/setters are implemented
+        String displaytemp = "Set temp: " + (String) 99 + (char)223 + "F"; // (String) 99 should be changed to something that actually comes from the settings once the getters/setters are implemented
         _lcd.print(displaytemp);
     // }
 }
