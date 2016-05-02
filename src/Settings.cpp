@@ -55,3 +55,30 @@ void MachineSettings::reset_default() {
 	settings_struct.temp_offset = 15;
 	update(settings_struct.brew_temp, settings_struct.steam_temp, settings_struct.temp_offset);
 }
+
+short MachineSettings::getBrewTemp(){
+	return settings_struct.brew_temp;
+}
+
+void MachineSettings::setBrewTemp(short brew_temp){
+	settings_struct.brew_temp = brew_temp;
+	EEPROM.updateBlock(configAddress, settings_struct);
+}
+
+short MachineSettings::getSteamTemp(){
+	return settings_struct.steam_temp;
+}
+
+void MachineSettings::setSteamTemp(short steam_temp){
+	settings_struct.steam_temp = steam_temp;
+	EEPROM.updateBlock(configAddress, settings_struct);
+}
+
+short MachineSettings::getTempOffset(){
+	return settings_struct.temp_offset;
+}
+
+void MachineSettings::setTempOffset(short temp_offset){
+	settings_struct.temp_offset = temp_offset;
+	EEPROM.updateBlock(configAddress, settings_struct);
+}

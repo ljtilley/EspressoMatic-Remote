@@ -42,6 +42,14 @@ public:
 	MachineSettings();
 	~MachineSettings();
 	void load();
+	
+	short getBrewTemp();
+	void setBrewTemp(short brew_temp);
+	short getSteamTemp();
+	void setSteamTemp(short steam_temp);
+	short getTempOffset();
+	void setTempOffset(short temp_offset);
+
 	void update(short brew, short steam, short offset);
 	settings_t get_settings();
 	void reset_default();
