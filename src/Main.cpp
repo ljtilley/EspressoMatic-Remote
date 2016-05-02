@@ -33,12 +33,6 @@
 
 /* NOTE: Don't forget to explicitly include all dependant libaries to not hide project dependencies in other headers */
 
-
-/* LCD SETUP */
-LiquidCrystal lcd(RSPIN, ENABLEPIN, D0, D1, D2, D3);
-
-
-
 // set default settings values:
 int brew_temp = 205;
 int steam_temp = 225;
@@ -55,18 +49,11 @@ MachineSettings settings;
 
 /* FUNCTION PROTOTYPES */
 /* TODO: Move this to Main.h */
-void sleepNow();
-void pwrInterrupt();
-
-void displayMenuValue();
 void loadMenuValues();
 
 void itemChangeEvent(MenuItemChangeEvent changed) {
     Serial.print("MenuItemChangeEven Fired\n");
-    lcd.clear();
-    lcd.print(Menu.getCurrent().getName());
-    lcd.setCursor(0, 1);
-    lcd.print(String(Menu.getCurrent().getValue())+(char)223+"F");
+    HardwareUI.refreshMenuItem(Menu.getCurrent());
 }
 
 void menuChangeEvent(MenuChangeEvent changed) {
@@ -146,12 +133,12 @@ void setup() {
     // Set up LCD
     //pinMode(LCD_BACKLIGHT, OUTPUT);
     //digitalWrite(LCD_BACKLIGHT, 0);
-    lcd.begin(LCD_COLS, LCD_ROWS);
+    //lcd.begin(LCD_COLS, LCD_ROWS);
 
     // Initialize Serial
     Serial.begin(9600);
-    lcd.setCursor(0, 0);
-    lcd.print("Hello World!!");
+    //lcd.setCursor(0, 0);
+    //lcd.print("Hello World!!");
 
     menuSetup();
 

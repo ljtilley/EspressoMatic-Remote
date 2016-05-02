@@ -141,4 +141,11 @@ void HardwareUIClass::displayMenuItem(MenuItem item) {
     }
 }
 
+void HardwareUIClass::refreshMenuItem(MenuItem item) {
+    _lcd.setCursor(0, 1);
+    _lcd.print("                ");
+    _lcd.setCursor(0, 1);
+    _lcd.print(String(item.getValue())+(char)223+"F");
+}
+
 HardwareUIClass HardwareUI;

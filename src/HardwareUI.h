@@ -59,7 +59,7 @@ public:
     void displayStatus();
     void clearDisplay();
     void displayMenuItem(MenuItem item);
-    void refreshMenuItem();
+    void refreshMenuItem(MenuItem item);
 
     void backlightON();
     void backlightOFF();
