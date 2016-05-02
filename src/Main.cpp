@@ -30,14 +30,6 @@
 
 /* NOTE: Don't forget to explicitly include all dependant libaries to not hide project dependencies in other headers */
 
-// set default settings values:
-int brew_temp = 205;
-int steam_temp = 225;
-int brew_time = 30;
-int preinf_time = 5;
-bool auto_brew = true;
-int temp_offset = 15;
-
 /* SETTINGS AND MACHINE STATUS SETUP */
 StatusPacket status {0, 0};
 

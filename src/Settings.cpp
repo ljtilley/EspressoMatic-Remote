@@ -15,9 +15,11 @@ MachineSettings::MachineSettings() {
 	settings_struct.version[0] = 'l';
 	settings_struct.version[1] = 's';
 	settings_struct.version[2] = '1';
-	settings_struct.brew_temp = 200;
-	settings_struct.steam_temp = 235;
-	settings_struct.temp_offset = 15;
+
+	//TODO: Move these default values to defines in S
+	settings_struct.brew_temp = DEFAULT_BREW_TEMP;
+	settings_struct.steam_temp = DEFAULT_STEAM_TEMP;
+	settings_struct.temp_offset = DEFAULT_TEMP_OFFSET;
 	// LEAVE THIS ON UNIL DEBUGGING IS FINISHED
 	EEPROM.setMaxAllowedWrites(50);
 	EEPROM.setMemPool(CONFIG_START,EEPROMSizePro);

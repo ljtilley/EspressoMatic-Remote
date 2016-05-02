@@ -23,6 +23,13 @@
 // Tell it where to store your config data in EEPROM
 #define CONFIG_START 32
 
+#define DEFAULT_BREW_TEMP 205;
+#define DEFAULT_STEAM_TEMP 225;
+#define DEFAULT_BREW_TIME 30;
+#define DEFAULT_PREINF_TIME 5;
+#define DEFAULT_AUTO_BREW true;
+#define DEFAULT_TEMP_OFFSET 15;
+
 struct settings_t {
 	short brew_temp;
 	short steam_temp;
