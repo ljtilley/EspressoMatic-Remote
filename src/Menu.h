@@ -30,4 +30,9 @@ extern MenuItem autobrew;
 extern MenuItem tempoffset;
 extern MenuItem reset;
 
+void itemChangeEvent(MenuItemChangeEvent changed);
+void menuChangeEvent(MenuChangeEvent changed);
+void menuSetup();
+void loadMenuValues();
+
 #endif /* end of include guard: MENU_H_ */

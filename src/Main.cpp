@@ -33,44 +33,6 @@
 /* SETTINGS AND MACHINE STATUS SETUP */
 StatusPacket status {0, 0};
 
-/* FUNCTION PROTOTYPES */
-/* TODO: Move this to Main.h */
-void loadMenuValues();
-
-void itemChangeEvent(MenuItemChangeEvent changed) {
-    Serial.print("MenuItemChangeEven Fired\n");
-    HardwareUI.refreshMenuItem(Menu.getCurrent());
-}
-
-void menuChangeEvent(MenuChangeEvent changed) {
-    HardwareUI.displayMenuItem(changed.to);
-}
-
-void menuSetup() {
-    // set up menu structure
-    MenuItem root = Menu.getRoot();
-    root.addAfter(brewtemp);
-    brewtemp.add(steamtemp);
-    // TODO: features to be added later with a second SSR
-    //steamtemp.add(brewtime);
-    //brewtime.add(preinftime);
-    //preinftime.add(autobrew);
-    steamtemp.add(tempoffset);
-    tempoffset.add(reset);
-    brewtemp.addBefore(reset);
-    loadMenuValues();
-}
-
-void loadMenuValues() {
-    // set default values:
-    brewtemp.setValue(Settings.getBrewTemp());
-    steamtemp.setValue(Settings.getSteamTemp());
-    // features to be added later with a second SSR
-    //brewtime.setValue(30);
-    //preinftime.setValue(5);
-    tempoffset.setValue(Settings.getTempOffset());
-}
-
 // actual functions
 void pwrInterrupt() {}
 
@@ -115,16 +77,8 @@ void sleepNow() {
 }
 
 void setup() {
-    // Set up LCD
-    //pinMode(LCD_BACKLIGHT, OUTPUT);
-    //digitalWrite(LCD_BACKLIGHT, 0);
-    //lcd.begin(LCD_COLS, LCD_ROWS);
-
     // Initialize Serial
     Serial.begin(9600);
-    //lcd.setCursor(0, 0);
-    //lcd.print("Hello World!!");
-
     menuSetup();
 
     //EEPROM Settings load and setup
