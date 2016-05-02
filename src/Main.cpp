@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include "HardwareDefines.h"
 
 /* nrf24l01 library stuff */
 #include <nRF24L01.h>
@@ -14,8 +13,6 @@
 /* Project Files */
 #include "Settings.h"
 #include "Status.h"
-
-
 
 /* Menu Related Files */
 #include <MenuBackend.h>
