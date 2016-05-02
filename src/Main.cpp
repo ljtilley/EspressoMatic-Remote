@@ -53,17 +53,10 @@ StatusPacket status {0, 0};
 settings_t settings_struct;
 MachineSettings settings;
 
-
-
-
-
-
 /* FUNCTION PROTOTYPES */
 /* TODO: Move this to Main.h */
 void sleepNow();
 void pwrInterrupt();
-void updateDisplay(bool connected, StatusPacket state);
-
 
 void displayMenuValue();
 void loadMenuValues();
@@ -199,26 +192,6 @@ void loadMenuValues() {
 }
 
 // actual functions
-
-void updateDisplay(bool connected, StatusPacket state) {
-	lcd.setCursor(0,0);
-	if(connected == false) {
-		lcd.print("Waiting for Connection...");
-	}
-	else {
-		lcd.print("Boiler temp: ");
-		lcd.print(status.temp);
-		//Serial.println(temp);
-		lcd.setCursor(0,1);
-		String displaytemp = "Set temp: " + (String) settings_struct.brew_temp + "F";
-		lcd.print(displaytemp);
-	}
-    //lcd.clear();
-
-    //int temp = (int) random(195, 205);
-
-}
-
 void pwrInterrupt() {}
 
 void sleepNow()
@@ -247,7 +220,6 @@ void sleepNow()
     power_timer1_disable();
     power_timer2_disable();
     power_twi_disable();
-
 
     sleep_cpu();
 
