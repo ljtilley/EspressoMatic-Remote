@@ -33,9 +33,6 @@
 /* SETTINGS AND MACHINE STATUS SETUP */
 StatusPacket status {0, 0};
 
-settings_t settings_struct;
-MachineSettings settings;
-
 /* FUNCTION PROTOTYPES */
 /* TODO: Move this to Main.h */
 void loadMenuValues();
@@ -66,13 +63,12 @@ void menuSetup() {
 
 void loadMenuValues() {
     // set default values:
-    settings_struct = settings.get_settings();
-    brewtemp.setValue(settings_struct.brew_temp);
-    steamtemp.setValue(settings_struct.steam_temp);
+    brewtemp.setValue(Settings.getBrewTemp());
+    steamtemp.setValue(Settings.getSteamTemp());
     // features to be added later with a second SSR
     //brewtime.setValue(30);
     //preinftime.setValue(5);
-    tempoffset.setValue(settings_struct.temp_offset);
+    tempoffset.setValue(Settings.getTempOffset());
 }
 
 // actual functions
@@ -133,11 +129,9 @@ void setup() {
 
     //EEPROM Settings load and setup
     EEPROM.setMaxAllowedWrites(50);
-    settings.load();
-    settings_struct = settings.get_settings();
-    Serial.println(settings_struct.brew_temp);
-    Serial.println(settings_struct.steam_temp);
-    Serial.println(settings_struct.temp_offset);
+    Serial.println(Settings.getBrewTemp());
+    Serial.println(Settings.getSteamTemp());
+    Serial.println(Settings.getTempOffset());
 }
 
 void loop() {
