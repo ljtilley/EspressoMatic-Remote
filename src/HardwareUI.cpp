@@ -117,18 +117,25 @@ void HardwareUIClass::displayOn() {
 }
 
 void HardwareUIClass::displayStatus() {
+    /* Once the radio is implemented and we're getting true status information
+     * then this function should change depending on the status
+     */
+    _lcd.clear();
     _lcd.setCursor(0,0);
-    // if(connected == false) {
-    //     _lcd.print("Waiting for Connection...");
-    // }
-    // else {
+    if(Status.getState() == DISCONNECTED) {
+        _lcd.print("Waiting for Connection...");
+    }
+    else {
         _lcd.print("Boiler temp: ");
         _lcd.print(Status.getTemp());
         //Serial.println(temp);
         _lcd.setCursor(0,1);
-        String displaytemp = "Set temp: " + (String) Settings.getBrewTemp() + (char)223 + "F"; // (String) 99 should be changed to something that actually comes from the settings once the getters/setters are implemented
-        _lcd.print(displaytemp);
-    // }
+        String displaytemp = "Set temp: " + (String) Settings.getBrewTemp() + (char)223 + "F";
+        // }
+    }
+
+
+
 }
 
 void HardwareUIClass::displayMenuItem(MenuItem item) {
