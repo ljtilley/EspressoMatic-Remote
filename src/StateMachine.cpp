@@ -1,5 +1,6 @@
 #include "StateMachine.h"
 #include "Settings.h"
+#include "Radio.h"
 
 int menu_timeout = 2000;
 unsigned long last_action_time = 0;
@@ -87,6 +88,12 @@ State EditMenu() {
 			} else if(strcmp(Menu.getCurrent().getName(), "Temp Offset") == 0) {
                 Settings.setTempOffset((short) Menu.getCurrent().getValue());
 			}
+            if(Radio.sendSettings() == true) {
+                Serial.println("Sent settings successfully");
+            }
+            else {
+                Serial.println("Sent settings unsuccessfully");
+            }
 			HardwareUI.displayMenuItem(Menu.getCurrent());
 			UserInterface.Set(DisplayMenu);
 		}

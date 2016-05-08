@@ -4,6 +4,7 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <RF24_config.h>
+#include "Radio.h"
 
 /* power libraries */
 #include <avr/interrupt.h>
@@ -78,7 +79,8 @@ void sleepNow() {
 
 void setup() {
     // Initialize Serial
-    Serial.begin(9600);
+    Serial.begin(57600);
+    Radio.radioInit();
     menuSetup();
 
     //EEPROM Settings load and setup
