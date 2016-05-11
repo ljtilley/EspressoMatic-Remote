@@ -59,7 +59,13 @@ State DisplayMenu() {
     // Check for transition cases. Either a timeout of 3 seconds of no activity (back to displaystatus) or click on the encoder to transition to edit state.
 
     else if (HardwareUI.sel_btn_isPressed()) {
-        UserInterface.Set(EditMenu);
+        if(strcmp(Menu.getCurrent().getName(), "Reset to Default") == 0) {
+            Settings.reset_default();
+            UserInterface.Set(DisplayMenu);
+        }
+        else {
+            UserInterface.Set(EditMenu);
+        }
     }
 }
 
