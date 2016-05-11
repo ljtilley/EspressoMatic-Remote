@@ -4,6 +4,7 @@
 #include <RF24_config.h>
 
 #include "Settings.h"
+#include "Status.h"
 
 #define RADIO_CE 6
 #define RADIO_CS 10
@@ -16,9 +17,11 @@ public:
     RadioClass();
     void radioInit();
     bool sendSettings();
+    StatusPacket getStatus();
 private:
-    RF24 _radio = RF24(6, 10);
+    RF24 _radio;
     settings_t _settings;
+    long _last_connection;
 };
 
 extern RadioClass Radio;

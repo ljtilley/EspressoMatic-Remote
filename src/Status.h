@@ -24,8 +24,10 @@ public:
 	//public stuff
 	StatusClass();
 	bool isConnected();
+	void refresh();
 	int getTemp();
 	short getState();
+	StatusPacket getStatusPacket();
 private:
 	StatusPacket _status;
 	//private stuff;

@@ -95,5 +95,6 @@ void loop() {
         sleepNow();
     }
     HardwareUI.pollButtons();
+    Status.refresh();
     EXEC(UserInterface);
 }

@@ -123,7 +123,9 @@ void HardwareUIClass::displayStatus() {
     _lcd.clear();
     _lcd.setCursor(0,0);
     if(Status.getState() == DISCONNECTED) {
-        _lcd.print("Waiting for Connection...");
+        _lcd.print("Waiting for");
+        _lcd.setCursor(0,1);
+        _lcd.print("Connection...");
     }
     else {
         _lcd.print("Boiler temp: ");
